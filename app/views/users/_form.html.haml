@@ -1,0 +1,11 @@
+=form_for @user do |f|
+  .form-group
+    =f.label :username
+    =f.text_field :name, class:"form-control", required:true, pattern:'.{3,}'
+  .form-group
+    =f.label :password
+    =f.password_field :password, class:"form-control"
+  .form-group
+    =f.label :confirm
+    =f.password_field :password_confirmation, class:"form-control"
+  =f.submit "Register", class:"btn btn-alert"

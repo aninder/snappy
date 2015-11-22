@@ -1,0 +1,10 @@
+.container
+  -if @user.errors
+    %ul
+      -@user.errors.messages.each do |field,error|
+        %li
+          =field
+          -error.each do |e|
+            =e
+  %h2 Register
+  =render "form"
