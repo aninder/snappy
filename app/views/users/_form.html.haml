@@ -7,5 +7,5 @@
     =f.password_field :password, class:"form-control"
   .form-group
     =f.label :confirm
-    =f.password_field :password_confirmation, class:"form-control"
+    =f.password_field :password_confirmation, class:"form-control", required:true
   =f.submit "Register", class:"btn btn-alert"

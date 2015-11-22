@@ -1,0 +1,8 @@
+=form_for @user, url:session_path  do |f|
+  .form-group
+    =f.label :username
+    =f.text_field :name, class:"form-control", required:true, pattern:'.{3,}'
+  .form-group
+    =f.label :password
+    =f.password_field :password, class:"form-control", required:true
+  =f.submit "Login", class:"btn btn-alert"
