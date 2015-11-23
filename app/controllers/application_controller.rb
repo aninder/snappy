@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
   def start_user_session user
     session[:user] = user.id
   end
+
+  def signed_in?
+    !session[:user].blank?
+  end
+  helper_method :signed_in?
 end

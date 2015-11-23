@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  # before_action checkSignedIn, only: :create
+  before_action :checkSignedIn, only: :create
+
   def index
     @question = Question.new
     @questions = Question.all
@@ -7,6 +8,9 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.build(question_params)
+    if current_user != params[:user_id]
+      headers["X-Hacking-Allowed"] = "nohacking"
+    end
     if @question.save
       redirect_to root_path, notice: "your question is saved n online"
     else
@@ -20,7 +24,10 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:ques)
   end
 
-  # def checkSignedIn
-  #
-  # end
+# function_level_access_control
+  def checkSignedIn
+    if !signed_in?
+      return head 420
+    end
+  end
 end

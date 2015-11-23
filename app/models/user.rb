@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :name,
             uniqueness: {case_sensitive: false},
             presence: true,
-            length: {minimum:3, maximum: 10},
+            length: {minimum:3, maximum: 25},
             format: /[a-zA-Z_0-9]/
 
   validates :password,
