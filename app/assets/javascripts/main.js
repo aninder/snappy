@@ -1,3 +1,7 @@
 $(function(){
-    $('input[type="text"]:first').focus();
-})
+    $(document).on("page:change",
+        function(e){
+            $('input[type="text"]:first').focus();
+        }
+    )}
+)

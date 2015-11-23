@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     u = User.find_by_name params[:user][:name]
     if u.try(:authenticate, params[:user][:password])
-      session[:user] = u.id
+      start_user_session u
       redirect_to root_path, notice: "user authenticated"
     else
       redirect_to new_session_path, notice: "login not sucessfull, try again"
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user
-    redirect_to new_session_path, notice: "you are logged out!!"
+    redirect_to root_path, notice: "you are logged out!!"
   end
 
   private
