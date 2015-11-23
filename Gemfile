@@ -56,6 +56,14 @@ group :development, :test do
   # gem  'flamegraph'
   gem  'rails-footnotes'
   gem  'traceroute'   #unused routes
-  gem 'rspec-rails'
 end
 
+group :test do
+  gem 'ffaker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end

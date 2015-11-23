@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  # before_action checksignedin
+  # before_action checkSignedIn, only: :create
   def index
     @question = Question.new
     @questions = Question.all
@@ -19,4 +19,8 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:ques)
   end
+
+  # def checkSignedIn
+  #
+  # end
 end
