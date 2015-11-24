@@ -1,7 +1,7 @@
 .container
   %h2 Ask a Question
   -if signed_in?
-    =render "questions/form"
+    =render partial:"questions/form", locals:{question:@question}
   -else
     %h4 Please login to ask or answer questions
   %hr

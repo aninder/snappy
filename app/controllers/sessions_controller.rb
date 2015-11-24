@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    u = User.find_by_name params[:user][:name]
-    if u.try(:authenticate, params[:user][:password])
+    u = User.find_by_name user_params[:name]
+    if u.try(:authenticate, user_params[:password])
       start_user_session u
       redirect_to root_path, notice: "user authenticated"
     else

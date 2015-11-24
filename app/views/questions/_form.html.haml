@@ -1,12 +1,12 @@
--if @question.errors
+-if question.errors
   %ul
-    -@question.errors.messages.each do |field,error|
+    -question.errors.messages.each do |field,error|
       %li
         =field
         -error.each do |e|
           =e
 
-=form_for([current_user, @question]) do |f|
+=form_for([current_user, question]) do |f|
   =f.label :question
   =f.text_field :ques
   =f.submit "Ask a Question", class:"btn btn-info"

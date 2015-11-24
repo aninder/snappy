@@ -27,20 +27,20 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
     context "with user signed in" do
+      before :each do
+        @u = FactoryGirl.create(:user)
+        login(@u)
+      end
       it "throws another hint when user_id in url is different from logged in user" do
-        u = FactoryGirl.create(:user)
-        login(u)
         post :create, question:FactoryGirl.attributes_for(:question), user_id:3
         expect(response.headers).to include('X-Hacking-Allowed')
       end
-    end
       it "saves with valid attributes" do
         expect {
-          u = FactoryGirl.create(:user)
-          login(u)
-          post :create, question:FactoryGirl.attributes_for(:question), user_id:u.id
+          post :create, question:FactoryGirl.attributes_for(:question), user_id:@u.id
         }.to change(Question, :count).by 1
       end
+    end
   end
 
   private

@@ -7,5 +7,9 @@ FactoryGirl.define do
       name "camus"
       password "1234"
     end
+
+    factory :admin do
+      admin true
+    end
   end
 end

@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.new
-    @questions = Question.all
+    @questions = Question.all.includes(:user)
   end
 
   def create

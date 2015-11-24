@@ -1,11 +1,11 @@
--if @user.errors
+-if user.errors
   %ul
-    -@user.errors.messages.each do |field,error|
+    -user.errors.messages.each do |field,error|
       %li
         =field
         -error.each do |e|
           =e
-=form_for @user do |f|
+=form_for user do |f|
   .form-group
     =f.label :username
     =f.text_field :name, class:"form-control", required:true, pattern:'.{3,}'

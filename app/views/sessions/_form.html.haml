@@ -1,4 +1,4 @@
-=form_for @user, url:session_path  do |f|
+=form_for user, url:session_path  do |f|
   .form-group
     =f.label :username
     =f.text_field :name, class:"form-control", required:true, pattern:'.{3,}'
