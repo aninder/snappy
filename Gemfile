@@ -56,6 +56,9 @@ group :development, :test do
   # gem  'flamegraph'
   gem  'rails-footnotes'
   gem  'traceroute'   #unused routes
+  gem 'brakeman'
+  gem 'rails_best_practices'
+  gem 'tarantula'
 end
 
 group :test do

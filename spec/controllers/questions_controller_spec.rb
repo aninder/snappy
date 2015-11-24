@@ -34,13 +34,13 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response.headers).to include('X-Hacking-Allowed')
       end
     end
-    it "saves with valid attributes" do
-      expect {
-        u = FactoryGirl.create(:user)
-        login(u)
-        post :create, question:FactoryGirl.attributes_for(:question), user_id:u.id
-      }.to change(Question, :count).by 1
-    end
+      it "saves with valid attributes" do
+        expect {
+          u = FactoryGirl.create(:user)
+          login(u)
+          post :create, question:FactoryGirl.attributes_for(:question), user_id:u.id
+        }.to change(Question, :count).by 1
+      end
   end
 
   private

@@ -4,7 +4,7 @@ FactoryGirl.define do
     password {FFaker::Internet.password(3,10)}
 
     factory :fixed_user do
-      name "osho"
+      name "camus"
       password "1234"
     end
   end
