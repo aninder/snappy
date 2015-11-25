@@ -3,7 +3,9 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.new
-    @questions = Question.all.includes(:user)
+    @questions = Question.includes(:user_restricted)
+    # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
+# binding.pry
   end
 
   def create
@@ -27,7 +29,8 @@ class QuestionsController < ApplicationController
 # function_level_access_control
   def checkSignedIn
     if !signed_in?
-      return head 420
+      head 420
+      false
     end
   end
 end

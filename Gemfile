@@ -59,6 +59,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'rails_best_practices'
   gem 'tarantula'
+  gem 'lol_dba'
 end
 
 group :test do

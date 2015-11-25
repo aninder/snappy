@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :questions
+  has_many :questions, dependent: :nullify
+  # has_many :other_user_questions, class_name: "Question", conditions: proc {["user_id != ?", self.id]}
+
   validates :name,
             uniqueness: {case_sensitive: false},
             presence: true,

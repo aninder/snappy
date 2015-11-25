@@ -7,11 +7,4 @@
   %hr
   %h3 Unsolved Questions
   %ul
-    -@questions.each do |q|
-      %li
-        =q.ques
-        %span
-          by
-          =q.user.name
-          =time_ago_in_words q.created_at
-          ago
+    =render @questions

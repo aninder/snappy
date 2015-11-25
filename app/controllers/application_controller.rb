@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  rescue_from ActionView::MissingTemplate,
+              with: proc{
+                           headers['X-NOT_ALLOWED']=request.headers['HTTP_ACCEPT']
+                           render :nothing => true, :status => 404
+                        }
+
   def current_user
     if session[:user]
       @current_user ||= User.find(session[:user])
