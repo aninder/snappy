@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.new
-    @questions = Question.includes(:user_restricted)
+    @questions = Question.includes(:user)
+    # User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
     # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
 # binding.pry
   end
