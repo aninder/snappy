@@ -6,13 +6,13 @@
         -error.each do |e|
           =e
 =form_for user do |f|
-  .form-group
+  .form-group.hvr-wobble-horizontal
     =f.label :username
     =f.text_field :name, class:"form-control", required:true, pattern:'.{3,}'
-  .form-group
+  .form-group.hvr-wobble-bottom
     =f.label :password
     =f.password_field :password, class:"form-control"
-  .form-group
+  .form-group.hvr-wobble-skew
     =f.label :confirm
     =f.password_field :password_confirmation, class:"form-control", required:true
   =f.submit "Register", class:"btn btn-alert"

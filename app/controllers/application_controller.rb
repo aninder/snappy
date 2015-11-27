@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
                            render :nothing => true, :status => 404
                         }
 
+
   def current_user
     if session[:user]
       @current_user ||= User.find(session[:user])
