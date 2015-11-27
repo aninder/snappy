@@ -25,4 +25,6 @@ class ApplicationController < ActionController::Base
     !session[:user].blank?
   end
   helper_method :signed_in?
+
+  before_action proc{sleep 1}
 end
