@@ -14,9 +14,22 @@ RSpec.feature "Sites", type: :feature do
     within 'span' do
       expect(page).to have_content("Welcome to Snappy")
     end
-    within 'h2' do
+
+    within '.container > h2' do
       expect(page).to have_content("Ask a Question")
     end
 # save_and_open_page
+  end
+
+  scenario "show details of a particular question" do
+    user = FactoryGirl.create(:user)
+    question = FactoryGirl.create(:random_question, user:user)
+    visit user_question_path(id:question.id, user_id:user.id)
+
+    within '.container > h2' do
+      expect(page).to have_content("#{user.name} asks:")
+    end
+    expect(page).to have_content("#{question.ques}")
+    expect(page).to have_content("please login to post answer to this question")
   end
 end

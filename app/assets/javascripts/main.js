@@ -6,7 +6,7 @@ $(function () {
     );
     $(document).on("page:fetch",
         function (e) {
-            $('header .loader-inner').addClass(get_random_loader());
+            $('header .loader-inner').addClass(get_random_animation(loader_classes));
             $('.container-main .container').addClass('animated '+get_random_animation(animations_out));
 
             add_req_divs();
@@ -14,14 +14,10 @@ $(function () {
     );
     $(document).on("page:load",
         function (e) {
-            $('.container-main .container').addClass('animated '+get_random_animation(animations_in));
+            $('.container-main .container').addClass('animated '+get_random_animation(animations_inz));
         }
     );
 });
-
-function get_random_loader(){
-    return loader_classes[Math.floor(Math.random()* loader_classes.length)];
-}
 
 function get_random_animation(an){
     return an[Math.floor(Math.random()* an.length)];
@@ -130,18 +126,18 @@ var animations_in=
 "slideInLeft",
 "slideInRight",
 "slideInUp",
+    "fadeIn",
+    "fadeInDown",
+    "fadeInDownBig",
+    "fadeInLeft",
+    "fadeInLeftBig",
+    "fadeInRight",
+    "fadeInRightBig",
+    "fadeInUp",
+    "fadeInUpBig"
 ]
 
 var animations_out=[
-    "fadeIn",
-        "fadeInDown",
-        "fadeInDownBig",
-        "fadeInLeft",
-        "fadeInLeftBig",
-        "fadeInRight",
-        "fadeInRightBig",
-        "fadeInUp",
-        "fadeInUpBig",
         "fadeOut",
         "fadeOutDown",
         "fadeOutDownBig",
@@ -175,6 +171,4 @@ var animations_out=[
     "flipOutX",
     "flipOutY",
     "hinge"
-
-
 ]

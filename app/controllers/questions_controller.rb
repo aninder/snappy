@@ -1,12 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :checkSignedIn, only: :create
+  before_action :checkSignedIn, only: [:create, :index]
 
   def index
-    @question = Question.new
-    @questions = Question.includes(:user)
-    # User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
-    # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
-# binding.pry
+    @questions = current_user.questions
   end
 
   def create
@@ -19,6 +15,18 @@ class QuestionsController < ApplicationController
     else
       redirect_to root_path, notice:"question cant be blank"
     end
+  end
+
+  def show
+    @question = Question.find params[:id]
+  end
+
+  def all
+    @question = Question.new
+    @questions = Question.includes(:user)
+    # User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
+    # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
+    # binding.pry
   end
 
   private

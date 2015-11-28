@@ -1,0 +1,9 @@
+.container
+  %h2 Ask a Question
+  -if signed_in?
+    =render partial:"questions/form", locals:{question:@question}
+  -else
+    %h4 Please login to ask or answer questions
+  %hr
+  %h3 Unsolved Questions
+  =render @questions

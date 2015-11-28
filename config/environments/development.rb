@@ -4,7 +4,10 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
+  config.cache_store = :mem_cache_store
   config.cache_classes = false
+  # Set expire header of 30 days for static files
+  config.static_cache_control = "public, max-age=2592000"
 
   # Do not eager load code on boot.
   config.eager_load = false

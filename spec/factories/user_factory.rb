@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    name {FFaker::Name.first_name + Random.rand(0..100000000).to_s }
+    name {FFaker::Name.first_name + Random.rand(0..1000000000).to_s }
     password {FFaker::Internet.password(3,10)}
 
     factory :fixed_user do

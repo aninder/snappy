@@ -1,0 +1,13 @@
+.container
+  %h2
+    =@question.user.name.capitalize
+    asks:
+  =@question.ques
+  %hr
+  %h3
+    Answer this Question
+  -if signed_in?
+    welcome haha!
+  -else
+    please login to post answer to this question
+

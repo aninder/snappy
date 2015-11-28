@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
   rescue_from ActionView::MissingTemplate,
               with: proc{
                            headers['X-NOT_ALLOWED']=request.headers['HTTP_ACCEPT']
@@ -17,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def setCurrentUser user
+    @current_user = user
+  end
+  helper_method :setCurrentUser
+
   def start_user_session user
     session[:user] = user.id
   end
@@ -26,5 +30,5 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in?
 
-  before_action proc{sleep 1}
+  # before_action proc{sleep 1}
 end

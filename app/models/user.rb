@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
             length: {minimum:3, maximum: 25},
             format: /\A[a-zA-Z_0-9]+\Z/
 
-  validates :password,
-            length: {minimum: 3, maximum: 10}
+  validates :password, on:[:create],
+            length: {minimum: 3, maximum: 11, msg:"passwors must be between 3 and 10 characters"}
 
    end

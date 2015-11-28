@@ -5,5 +5,9 @@ FactoryGirl.define do
     factory :valid_question do
       association :user
     end
+
+    factory :random_question do
+      ques FFaker::Lorem.phrase
+    end
   end
 end

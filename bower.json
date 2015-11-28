@@ -1,0 +1,24 @@
+{
+  "name": "snappy",
+  "homepage": "https://github.com/aninder/snappy",
+  "authors": [
+    "xxx@gmail.com"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "~3.4.0",
+    "loaders.css": "~0.1.1",
+    "hover": "Hover#~2.0.2"
+  }
+}

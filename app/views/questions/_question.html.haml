@@ -1,11 +1,13 @@
--cache question do
-  %li
-    =question.ques
-    %span
-      by
-      -if question.user
-        =question.user.name
-      -else
-        DEAD USER
-      =time_ago_in_words question.created_at
-      ago
+-cache [question, question.user] do
+  %ul
+    %li
+      =link_to question.ques, user_question_path(question.user, question.id )
+      %span
+        by
+        -if question.user
+          -cache question.user do
+            =question.user.name
+        -else
+          DEAD USER
+        =time_ago_in_words question.created_at
+        ago
