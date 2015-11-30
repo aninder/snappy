@@ -30,5 +30,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in?
 
+  # function_level_access_control
+  def checkSignedIn
+    if !signed_in?
+      head 420
+      false
+    end
+  end
+
+
   # before_action proc{sleep 1}
 end

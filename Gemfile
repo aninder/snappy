@@ -31,7 +31,8 @@ group :development, :test do
   gem  'rb-fsevent'
   gem  'guard-rspec'
   gem  'guard-livereload'
-end
+  gem 'rspec-rails'
+  end
 
 group :test do
   gem 'ffaker'
@@ -39,6 +40,5 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'rspec-rails'
   gem 'factory_girl_rails'
 end

@@ -7,7 +7,13 @@
   %h3
     Answer this Question
   -if signed_in?
-    welcome haha!
+    =form_for [current_user, @question, Answer.new] do |f|
+      .form-group.hvr-wobble-horizontal
+        =f.text_field :ans,
+        class:"form-control",
+        required:true, pattern:'.{3,}',
+        placeholder:"Answer"
+      =f.submit "Post Answer", class:"btn btn-info"
   -else
     please login to post answer to this question
-
+  %hr

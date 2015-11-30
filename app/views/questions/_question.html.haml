@@ -1,7 +1,10 @@
 -cache [question, question.user] do
   %ul
     %li
-      =link_to question.ques, user_question_path(question.user, question.id )
+      -if question.user
+        =link_to question.ques, user_question_path(user_id:question.user.id, id:question.id)
+      -else
+        =question.ques
       %span
         by
         -if question.user

@@ -7,9 +7,8 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.build(question_params)
-    if current_user != params[:user_id]
-      headers["X-Hacking-Allowed"] = "nohacking"
-    end
+    checkUnsafeDirectObjectReference
+
     if @question.save
       redirect_to root_path, notice: "your question is saved n online"
     else
@@ -35,11 +34,9 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:ques)
   end
 
-# function_level_access_control
-  def checkSignedIn
-    if !signed_in?
-      head 420
-      false
+  def checkUnsafeDirectObjectReference
+    if current_user != params[:user_id]
+    headers["X-Hacking-Allowed"] = "nohacking"
     end
   end
 end
