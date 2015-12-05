@@ -24,6 +24,15 @@ require 'rspec/rails'
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
+
+module Helper
+  def login(user)
+    #@current_user is memoised, so first set current_user to nil
+    controller.setCurrentUser nil
+    session[:user] = user.id
+  end
+end
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
@@ -54,5 +63,6 @@ RSpec.configure do |config|
   #   DatabaseCleaner.clean
   # end
   config.tty = true
+  config.include Helper
 
 end

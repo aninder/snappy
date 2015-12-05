@@ -4,6 +4,17 @@
     asks:
   =@question.ques
   %hr
+  -if @question.answers.count > 0
+    %h3 Answers
+    %ul
+      -@question.answers.each do |ans|
+        %li
+          =ans.ans
+          by
+          =ans.user.name.capitalize
+  -else
+    %h3 Be the first one to answer
+  %hr
   %h3
     Answer this Question
   -if signed_in?

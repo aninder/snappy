@@ -127,12 +127,4 @@ RSpec.describe QuestionsController, type: :controller do
 
     end
   end
-
-  private
-
-  def login(user)
-    #@current_user is memoised
-    controller.setCurrentUser nil
-    session[:user] = user.id
-  end
 end

@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   default_scope {order("questions.id DESC")}
 
   belongs_to :user
+  has_many :answers
   # belongs_to :user_restricted, :select => "users.id, users.email", :class_name => "User"
   validates_presence_of :ques
   validates_presence_of :user
