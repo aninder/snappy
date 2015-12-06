@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'questions#all'
   resources :users, only:[:new, :create] do
-      resources :questions, only:[:create, :index, :show] do
+      resources :questions, only:[:create, :index, :show, :edit, :update] do
         resources :answers, only: :create
       end
   end

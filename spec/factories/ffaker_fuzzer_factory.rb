@@ -32,34 +32,34 @@ FactoryGirl.module_eval do
   end
 end
 
-def fuzz
-    #remove deprecation warnings
-  if !$stderr.is_a?StringIO
-    stderr = $stderr
-    $stderr = StringIO.new('', 'w')
-  end
-  FFaker.const_get(FFaker.constants.sample).instance_eval do
-    if is_a?String
-      return self
-    end
-    if is_a?Array
-      return sample
-    end
-    m = instance_methods(false).sample
-    if((methods.include?m) && (method(m).parameters.empty?||method(m).parameters.first.first == :opt))
-      ss = send(m){}
-      if ss != nil
-        return ss
-      else
-        TOPLEVEL_BINDING.eval("self").send(:prob,"#{self}----#{m}")
-      end
-    else
-      fuzz
-    end
-  end
-  ensure
-    $stderr = stderr if stderr
-end
+# def fuzz
+#     #remove deprecation warnings
+#   if !$stderr.is_a?StringIO
+#     stderr = $stderr
+#     $stderr = StringIO.new('', 'w')
+#   end
+#   FFaker.const_get(FFaker.constants.sample).instance_eval do
+#     if is_a?String
+#       return self
+#     end
+#     if is_a?Array
+#       return sample
+#     end
+#     m = instance_methods(false).sample
+#     if((methods.include?m) && (method(m).parameters.empty?||method(m).parameters.first.first == :opt))
+#       ss = send(m){}
+#       if ss != nil
+#         return ss
+#       else
+#         TOPLEVEL_BINDING.eval("self").send(:prob,"#{self}----#{m}")
+#       end
+#     else
+#       fuzz
+#     end
+#   end
+#   ensure
+#     $stderr = stderr if stderr
+# end
 
 
 

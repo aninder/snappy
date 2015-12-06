@@ -88,14 +88,6 @@ RSpec.describe QuestionsController, type: :controller do
         get :index, user_id:@u
         expect(assigns(:questions).count).to eq 13
       end
-      # it "XXXX" do
-      #   begin
-      #     1000.times {@u = FactoryGirl.create(:user)}
-      #   rescue ActiveRecord::RecordInvalid
-      #     puts @u.name
-      #     binding.pry
-      #   end
-      # end
     end
 
     context "with user not signed in" do
@@ -124,7 +116,74 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to have_http_status 200
       expect(response).to render_template :show
       expect(assigns(:question).id).to eq @question.id
+    end
+  end
 
+  describe "GET #edit " do
+    before(:each) do
+      @u = FactoryGirl.create(:user)
+      @question = FactoryGirl.create(:random_question, user:@u)
+    end
+
+    context "with user signed in" do
+      before :each do
+        login(@u)
+      end
+      it "shows error if question does not belong to the user" do
+        another_question = FactoryGirl.create(:random_question, user:FactoryGirl.create(:user))
+        get :edit, user_id:@u.id, id:another_question.id
+        expect(response).to have_http_status 302
+        expect(flash[:notice]).to eq "you can only edit your own questions"
+      end
+      it "shows error when question is invalid" do
+        get :edit, user_id:@question.user.id, id:@question.id+100
+        expect(response).to have_http_status 302
+        expect(flash[:notice]).to eq "question does not exist"
+      end
+    end
+
+    context "with user not signed in" do
+      it "shows error" do
+        get :edit, user_id:@u.id, id:@question.id
+        expect(response).to have_http_status 420
+      end
+      it "shows error 'with random url parameters'" do
+        10.times {
+          get :edit,
+              user_id:FactoryGirl.fuzz_without_boolean_and_nil_values,
+              id:FactoryGirl.fuzz_without_boolean_and_nil_values
+          expect(response).to have_http_status 420
+        }
+      end
+    end
+  end
+
+  describe "POST #create" do
+    before(:each) do
+      @u = FactoryGirl.create(:user)
+      @question = FactoryGirl.create(:random_question, user:@u)
+    end
+
+    context "with user not signed in" do
+      it "shows error" do
+        post :update,
+             user_id:FactoryGirl.fuzz_without_boolean_and_nil_values,
+             id:FactoryGirl.fuzz_without_boolean_and_nil_values
+        expect(response).to have_http_status 420
+      end
+    end
+    context "with user signed in"  do
+      before :each do
+        login @u
+      end
+      it "does not allow to change question which does not belong to logged in user" do
+        another_question = FactoryGirl.create(:random_question, user:FactoryGirl.create(:user))
+        post :update,
+             user_id:another_question.user.id,
+             id:another_question.id
+
+
+      end
     end
   end
 end
