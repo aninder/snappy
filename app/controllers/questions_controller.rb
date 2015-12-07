@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
 
   def all
     @question = Question.new
-    @questions = Question.includes(:user).page(params[:page]).per_page 3
+    @questions = Question.includes(:user).per_page(5).page(params[:page])
     # User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
     # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
     # binding.pry

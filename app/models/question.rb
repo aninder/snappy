@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-
   #dont order by created_at, as it is not indexed by default, use id instead which has a clustered index
   default_scope {order("questions.id DESC")}
 
