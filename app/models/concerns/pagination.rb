@@ -3,20 +3,14 @@ module Pagination
   def page page_num
     page_num = page_num.to_i
     page_num = page_num < 0 ? 0 : page_num
-    self.current_page = page_num
-    if pagesize
-      offset(pagesize*current_page).limit(count)
-    else
-      self
+    scope = self.extending do
+      define_method :per_page do |count|
+        self.pagesize = count
+        self.current_page = page_num
+        offset(count*page_num).limit(count)
+      end
     end
-  end
-  def per_page count
-    self.pagesize = count
-    if current_page
-      offset(pagesize*current_page).limit(count)
-    else
-      self
-    end
+    scope
   end
   def fullresultcount
     excluded = [:order, :limit, :offset, :reorder, :includes]
@@ -25,7 +19,7 @@ module Pagination
   end
   def pages
     c = fullresultcount/pagesize
-    c+=1 if fullresultcount%pagesize > 0
+     c+=1 if fullresultcount%pagesize > 0
     c
   end
 end

@@ -11,7 +11,9 @@
   background: lightcoral;
   header {
     min-height      : 90px;
-    background: darkblue;
+    background: url("1.jpg");
+    background-size: 100% 100%;
+    color: blue;
     padding: 2px 0 10px 0;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
@@ -27,3 +29,44 @@
     width: 100%;
   }
 }
+
+@media(max-width:767px) {
+  main {
+    background: url(5.jpg) ;
+    background-size: 100% 100%;
+    .container > ul {
+      li {
+        font-family: fantasy;
+        list-style: circle;
+        padding-bottom: 16px;
+        span.ques{
+          display: block;
+          font-size: 1.3em;
+        }
+        span.byques{
+          color: #cccccc;
+          font-size: 0.7em;
+        }
+        span.quesusername{
+          font-size:1.2em ;
+          margin:0 10px;
+          text-shadow: 2px 2px grey;
+        }
+        span.questime {
+          display: block;
+          position: absolute;
+          font-size: .7em;
+        }
+        span.queseditlink {
+          position: relative;
+          float: right;
+          background-color: aliceblue;
+          padding: 10px;
+          box-shadow: inset #999 4px -4px 2px 0;
+        }
+      }
+    }
+  }
+}
+  //xs
+

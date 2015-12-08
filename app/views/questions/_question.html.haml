@@ -1,23 +1,29 @@
 -cache [question, question.user] do
   %ul
     %li
-      -if question.user
-        =link_to question.ques, user_question_path(user_id:question.user.id, id:question.id)
-      -else
-        =question.ques
-      %span
+      %span.ques
+        -if question.user
+          =link_to question.ques, user_question_path(user_id:question.user.id, id:question.id)
+        -else
+          =question.ques
+      %span.byques
         by
+      %span.quesusername
         -if question.user
           -cache question.user do
             =question.user.name
         -else
           DEAD USER
-        =time_ago_in_words question.created_at
-        ago
-        -if question.user && current_user==question.user
+      %span.questime
+        %span.questimef
+          =time_ago_in_words question.created_at
+        %span.quesago
+          ago
+      -if question.user && current_user==question.user
+        %span.queseditlink
           =link_to("edit",edit_user_question_path(user_id:question.user.id,  id:question))
-        \-(
+      %span.quesans
+        (
         =pluralize(question.answers.count,'answer')
         )
-
 

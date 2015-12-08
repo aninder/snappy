@@ -9,6 +9,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'dalli'
+# gem 'will_paginate'
 group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
@@ -32,7 +33,10 @@ group :development, :test do
   gem  'guard-rspec'
   gem  'guard-livereload'
   gem 'rspec-rails'
-  end
+  gem 'rack-mini-profiler'
+  gem  'flamegraph'
+
+end
 
 group :test do
   gem 'ffaker'

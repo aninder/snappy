@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def paginate collection
+  def will_paginate collection
     html = "<div class='text-center'><ul class='pagination'>"
     collection.pages.times do |i|
       if i == (collection.current_page || 0)

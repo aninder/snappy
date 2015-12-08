@@ -70,8 +70,8 @@ guard :rspec, cmd: "bundle exec rspec" do
 end
 
 guard 'livereload' do
-  watch(%r{app/views/.+\.(erb|haml|slim)$})
-  watch(%r{app/.+\.rb})
+  # watch(%r{app/views/.+\.()$})
+  watch(%r{app/.+\.(rb|erb|haml|slim|scss)})
   watch(%r{public/.+\.(css|js|html)})
   watch(%r{config/locales/.+\.yml})
   # Rails Assets Pipeline

@@ -1,14 +1,13 @@
 class QuestionsController < ApplicationController
   before_action :checkSignedIn, only: [:create, :index, :edit, :update]
+  before_action :checkUnsafeDirectObjectReference, only: [:index, :create]
 
   def index
-    @questions = current_user.questions
+    @questions = current_user.questions.page(params[:page]).per_page(4)
   end
 
   def create
     @question = current_user.questions.build(question_params)
-    checkUnsafeDirectObjectReference
-
     if @question.save
       redirect_to root_path, notice: "your question is saved n online"
     else
@@ -22,7 +21,7 @@ class QuestionsController < ApplicationController
 
   def all
     @question = Question.new
-    @questions = Question.includes(:user).per_page(5).page(params[:page])
+    @questions = Question.includes(:user).page(params[:page]).per_page(4)
     # User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
     # @questions = Question.all.select("questions.user_id","questions.ques","questions.created_at","users.name","users.id").joins(:user)
     # binding.pry
