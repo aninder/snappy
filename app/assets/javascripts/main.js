@@ -2,6 +2,7 @@ $(function () {
     $(document).on("page:change",
         function (e) {
             $('input[type="text"]:first').focus();
+            startTextualizer();
         }
     );
     $(document).on("page:fetch",
@@ -14,9 +15,12 @@ $(function () {
     );
     $(document).on("page:load",
         function (e) {
-            $('.container-main .container').addClass('animated '+get_random_animation(animations_inz));
+            $('.container-main .container').addClass('animated '+get_random_animation(animations_in));
         }
     );
+    init();
+    //startRainbow();
+    //startTypist();
 });
 
 function get_random_animation(an){
@@ -92,6 +96,48 @@ var addDivs = function(n) {
     return arr;
 };
 
+var startTextualizer = function() {
+    var txt = $('header h2');
+    var list = ['Snappy',"Snappy!"];
+    var options = {
+        duration: 1000,          // Time (ms) each blurb will remain on screen
+        rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
+        effect: 'random',        // Animation effect the characters use to appear
+        centered: true           // Centers the text relative to its container
+    };
+
+    txt.textualizer(list, options); // textualize it!
+    txt.textualizer('start'); // start
+};
+
+var startTypist = function() {
+    $('main h2').typist({
+        height: 60
+    });
+
+    $('main h2').typist('prompt')
+        .wait(100)
+        .typist('type', 'greet')
+        .typist('echo', 'Hello, world!')
+};
+
+var startRainbow = function() {
+    $('main h2').rainbow({
+        colors: [
+            '#FF0000',
+            '#f26522',
+            '#fff200',
+            '#00a651',
+            '#28abe2',
+            '#2e3192',
+            '#6868ff'
+        ],
+        animate: true,
+        animateInterval: 10000,
+        pad: false,
+        pauseLength: 100
+    });
+}
 
 var animations_in=
 ["bounce",

@@ -20,7 +20,7 @@
         %span.quesago
           ago
       -if question.user && current_user==question.user
-        %span.queseditlink
+        %span.queseditlink.hvr-back-pulse.hvr-grow-shadow
           =link_to("edit",edit_user_question_path(user_id:question.user.id,  id:question))
       %span.quesans
         (

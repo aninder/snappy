@@ -19,6 +19,7 @@
   "dependencies": {
     "animate.css": "~3.4.0",
     "loaders.css": "~0.1.1",
-    "hover": "Hover#~2.0.2"
+    "hover": "Hover#~2.0.2",
+    "snabbt.js": "~0.5.8"
   }
 }

@@ -3,7 +3,7 @@
   -if signed_in?
     =render partial:"questions/form", locals:{question:@question, submit:"Ask a Question"}
   -else
-    %h4 Please login to ask or answer questions
+    =render partial:"guest"
   %hr
   %h3 Unsolved Questions
   =render @questions
