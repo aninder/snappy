@@ -1,34 +1,36 @@
 FactoryGirl.module_eval do
-  def self.fuzz
-    #remove deprecation warnings
-    if !$stderr.is_a?StringIO
-      stderr = $stderr
-      $stderr = StringIO.new('', 'w')
+  class << self
+    def fuzz
+      #remove deprecation warnings from the log
+      if !$stderr.is_a?StringIO
+        stderr = $stderr
+        $stderr = StringIO.new('', 'w')
+      end
+      FFaker.const_get(FFaker.constants.sample).instance_eval do
+        if is_a?String
+          return self
+        end
+        if is_a?Array
+          return sample
+        end
+        m = instance_methods(false).sample
+        if((methods.include?m) && (method(m).parameters.empty?||method(m).parameters.first.first == :opt))
+          send(m){}
+        else
+          FactoryGirl.fuzz
+        end
+      end
+    ensure
+      $stderr = stderr if stderr
     end
-    FFaker.const_get(FFaker.constants.sample).instance_eval do
-      if is_a?String
-        return self
-      end
-      if is_a?Array
-        return sample
-      end
-      m = instance_methods(false).sample
-      if((methods.include?m) && (method(m).parameters.empty?||method(m).parameters.first.first == :opt))
-        send(m){}
-      else
-        FactoryGirl.fuzz
-      end
+    def fuzz_without_nil_values
+      val = fuzz
+      val==nil ? fuzz_without_nil_values : val
     end
-  ensure
-    $stderr = stderr if stderr
-  end
-  def self.fuzz_without_nil_values
-    val = fuzz
-    val==nil ? fuzz_without_nil_values : val
-  end
-  def self.fuzz_without_boolean_and_nil_values
-    val = fuzz_without_nil_values
-    ([true,false].include?val) ? fuzz_without_boolean_and_nil_values : val
+    def fuzz_without_boolean_and_nil_values
+      val = fuzz_without_nil_values
+      ([true,false].include?val) ? fuzz_without_boolean_and_nil_values : val
+    end
   end
 end
 

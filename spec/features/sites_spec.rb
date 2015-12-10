@@ -30,6 +30,6 @@ RSpec.feature "Sites", type: :feature do
       expect(page).to have_content("#{user.name} asks:")
     end
     expect(page).to have_content("#{question.ques}")
-    expect(page).to have_content("please login to post answer to this question")
+    expect(page).to have_content("Please login to ask or answer questions")
   end
 end

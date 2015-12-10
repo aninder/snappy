@@ -5,9 +5,13 @@ module Pagination
     page_num = page_num < 0 ? 0 : page_num
     scope = self.extending do
       define_method :per_page do |count|
-        self.pagesize = count
-        self.current_page = page_num
-        offset(count*page_num).limit(count)
+        if Rails.application.config.pagination
+          self.pagesize = count
+          self.current_page = page_num
+          offset(count*page_num).limit(count)
+        else
+          self
+        end
       end
     end
     scope
